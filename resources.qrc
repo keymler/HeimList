@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>data/tasks.txt</file>
+    </qresource>
+    <qresource prefix="/img">
+        <file>img/createIcon.jpg</file>
+        <file>img/deleteIcon.jpg</file>
+        <file>img/editIcon.jpg</file>
+    </qresource>
+</RCC>
