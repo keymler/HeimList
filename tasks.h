@@ -14,7 +14,7 @@ public:
     int getStatus() const;
     QString getDifficulty() const;
     QDateTime getDateTime() const;
-    QString getText() const;
+    QString getText() const; //
 
     virtual QString toString() const;
 
