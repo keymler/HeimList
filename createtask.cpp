@@ -46,17 +46,13 @@ void createTask::on_saveButton_clicked()
         if (task.saveTaskToFile(newTaskNumber, status, difficulty, dateTime, text))
         {
             close();
-        }
-        else
-        {
+        } else{
             warningWindow w;
             w.setErrorDescription("Failed to save the task to a file");
             w.setModal(true);
             w.exec();
         }
-    }
-    else
-    {
+    } else{
         warningWindow w;
         w.setErrorDescription("Not all fields are filled in");
         w.setModal(true);

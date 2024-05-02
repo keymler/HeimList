@@ -13,14 +13,12 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     tasks.cpp \
-    taskwidgetitem.cpp \
     warningwindow.cpp
 
 HEADERS += \
     createtask.h \
     mainwindow.h \
     tasks.h \
-    taskwidgetitem.h \
     warningwindow.h
 
 FORMS += \

@@ -3,6 +3,13 @@
 
 #include <QString>
 #include <QDateTime>
+#include <QListWidget>
+#include <QLabel>
+#include <QCheckBox>
+#include <QGridLayout>
+#include <QFile>
+#include <QTextStream>
+
 
 class Tasks
 {
@@ -19,6 +26,7 @@ public:
     virtual QString toString() const;
 
     bool saveTaskToFile(int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text);
+    void createTaskItem(QListWidget* listWidget, int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text);
 
 protected:
     int number;
@@ -26,6 +34,7 @@ protected:
     QString difficulty;
     QDateTime dateTime;
     QString text;
+    QListWidget* listWidget;
 };
 
 #endif // TASKS_H
