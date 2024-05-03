@@ -75,7 +75,7 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
 
     QString dateTimeString = dateTime.toString();
     QLabel *dateLabel = new QLabel(dateTimeString);
-    dateLabel->setFixedSize(100, 25);
+    dateLabel->setFixedSize(150, 25);
     layout->addWidget(dateLabel, 1, 0, Qt::AlignLeft | Qt::AlignBottom);
 
     QCheckBox *checkBox = new QCheckBox;

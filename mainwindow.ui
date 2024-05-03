@@ -54,7 +54,8 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">background-color: rgb(255, 245, 165);
+color: rgb(36, 20, 0);</string>
     </property>
    </widget>
    <widget class="QLabel" name="score">
@@ -86,7 +87,8 @@
     <string>toolBar</string>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(33, 25, 19);</string>
+    <string notr="true">background-color: rgb(33, 25, 19);
+</string>
    </property>
    <property name="iconSize">
     <size>

@@ -3,12 +3,15 @@
 #include "warningwindow.h"
 #include <QTextStream>
 #include <tasks.h>
+#include <mainwindow.h>
+#include <QApplication>
 
 createTask::createTask(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::createTask)
 {
     ui->setupUi(this);
+
 
     QFile file("./tasks.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -32,6 +35,7 @@ createTask::~createTask()
 
 void createTask::on_saveButton_clicked()
 {
+
     if (!ui->lineEdit->text().isEmpty() &&
         !ui->dateTimeEdit->text().isEmpty() &&
         ui->difficultyEdit->currentIndex() != -1)
@@ -46,6 +50,7 @@ void createTask::on_saveButton_clicked()
         if (task.saveTaskToFile(newTaskNumber, status, difficulty, dateTime, text))
         {
             close();
+
         } else{
             warningWindow w;
             w.setErrorDescription("Failed to save the task to a file");
