@@ -3,12 +3,12 @@
 #include "warningwindow.h"
 #include <QTextStream>
 #include <tasks.h>
-#include <mainwindow.h>
 #include <QApplication>
 
-createTask::createTask(QWidget *parent)
+createTask::createTask(QWidget *parent, QListWidget *listWidget)
     : QDialog(parent)
     , ui(new Ui::createTask)
+    , m_listWidget(listWidget)
 {
     ui->setupUi(this);
 
@@ -49,6 +49,8 @@ void createTask::on_saveButton_clicked()
         Tasks task(newTaskNumber, status, difficulty, dateTime, text);
         if (task.saveTaskToFile(newTaskNumber, status, difficulty, dateTime, text))
         {
+            Tasks tasks;
+            tasks.reloadTasksFromFile(m_listWidget);
             close();
 
         } else{

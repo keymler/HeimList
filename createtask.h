@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include <QTextStream>
+#include "mainwindow.h"
 
 namespace Ui {
 class createTask;
@@ -14,7 +15,7 @@ class createTask : public QDialog
     Q_OBJECT
 
 public:
-    explicit createTask(QWidget *parent = nullptr);
+    explicit createTask(QWidget *parent = nullptr, QListWidget *listWidget = nullptr);
     ~createTask();
 
 private slots:
@@ -24,6 +25,7 @@ private slots:
 private:
     Ui::createTask *ui;
     int maxTaskNumber = 0;
+    QListWidget *m_listWidget;
 };
 
 #endif // CREATETASK_H

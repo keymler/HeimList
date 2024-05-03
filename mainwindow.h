@@ -19,9 +19,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-public slots:
-    void reloadTasksFromFile();
-
 private slots:
     void on_actioncreate_triggered();
 

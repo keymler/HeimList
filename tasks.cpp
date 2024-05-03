@@ -1,6 +1,9 @@
 #include "tasks.h"
-#include "qfile.h"
-#include "ui_mainwindow.h"
+#include "warningwindow.h"
+
+Tasks::Tasks() {
+
+}
 
 Tasks::Tasks(int number, int status, const QString &difficulty, const QDateTime &dateTime, const QString &text)
     : number(number), status(status), difficulty(difficulty), dateTime(dateTime), text(text)
@@ -40,7 +43,6 @@ QString Tasks::getText() const
 QString Tasks::toString() const
 {
     QString formattedDateTime = dateTime.toString("dd.MM.yyyy HH:mm");
-
     return QString("%1/%2/%3/%4/%5").arg(number).arg(status).arg(difficulty).arg(formattedDateTime).arg(text);
 }
 
@@ -53,18 +55,17 @@ bool Tasks::saveTaskToFile(int number, int status, const QString& difficulty, co
         QString formattedDateTime = dateTime.toString("dd.MM.yyyy HH:mm");
         writeStream << QString("%1/%2/%3/%4/%5").arg(number).arg(status).arg(difficulty).arg(formattedDateTime).arg(text) << Qt::endl;
         file.close();
-        return 1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }
 
 void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text)
 {
     QListWidgetItem *item = new QListWidgetItem;
-
     QWidget *widget = new QWidget;
     QGridLayout *layout = new QGridLayout(widget);
 
@@ -92,4 +93,31 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
     item->setSizeHint(QSize(335, 75));
     listWidget->addItem(item);
     listWidget->setItemWidget(item, widget);
+}
+
+void Tasks::reloadTasksFromFile(QListWidget* listWidget)
+{
+    qDebug() << "asfuhid";
+    listWidget->clear();
+    QFile file("./tasks.txt");
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream readStream(&file);
+        readStream.seek(0);
+        while (!readStream.atEnd()) {
+            QString line = readStream.readLine();
+            QStringList parts = line.split("/");
+            int number = parts[0].toInt();
+            int status = parts[1].toInt();
+            QString difficulty = parts[2];
+            QDateTime dateTime = QDateTime::fromString(parts[3], "dd.MM.yyyy HH:mm");
+            QString text = parts[4];
+            createTaskItem(listWidget, number, status, difficulty, dateTime, text);
+        }
+        file.close();
+    } else {
+        warningWindow w;
+        w.setErrorDescription("File doesnt open");
+        w.setModal(true);
+        w.exec();
+    }
 }
