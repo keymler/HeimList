@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     createtask.cpp \
+    edittask.cpp \
     main.cpp \
     mainwindow.cpp \
     tasks.cpp \
@@ -17,12 +18,14 @@ SOURCES += \
 
 HEADERS += \
     createtask.h \
+    edittask.h \
     mainwindow.h \
     tasks.h \
     warningwindow.h
 
 FORMS += \
     createtask.ui \
+    edittask.ui \
     mainwindow.ui \
     warningwindow.ui
 

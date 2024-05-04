@@ -21,6 +21,10 @@ public:
 
 private slots:
     void on_actioncreate_triggered();
+    void on_actiondelete_triggered(bool checked);
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_actionedit_triggered(bool checked);
+    void updateWidgetStyleEdit(bool editMode);
 
 private:
     Ui::MainWindow *ui;

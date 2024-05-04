@@ -107,6 +107,9 @@ color: rgb(36, 20, 0);</string>
    </property>
   </action>
   <action name="actionedit">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/img/img/editIcon.jpg</normaloff>:/img/img/editIcon.jpg</iconset>
@@ -119,6 +122,9 @@ color: rgb(36, 20, 0);</string>
    </property>
   </action>
   <action name="actiondelete">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/img/img/deleteIcon.jpg</normaloff>:/img/img/deleteIcon.jpg</iconset>

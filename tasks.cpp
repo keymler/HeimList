@@ -48,7 +48,6 @@ QString Tasks::toString() const
 
 bool Tasks::saveTaskToFile(int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text)
 {
-    // Открываем файл для чтения и записи
     QFile file("./tasks.txt");
     if (file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
@@ -93,6 +92,11 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
     difficultyLabel->setFixedSize(50, 25);
     layout->addWidget(difficultyLabel, 1, 2, Qt::AlignRight | Qt::AlignBottom);
 
+    QLabel *taskNumberLabel = new QLabel(QString::number(number));
+    taskNumberLabel->setObjectName("taskNumberLabel");
+    taskNumberLabel->setVisible(false);
+    layout->addWidget(taskNumberLabel, 0, 3, Qt::AlignRight);
+
     layout->setContentsMargins(5, 5, 5, 5);
     layout->setColumnStretch(1, 1);
 
@@ -109,6 +113,7 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
     listWidget->addItem(separatorItem);
     listWidget->setItemWidget(separatorItem, separator);
 }
+
 
 void Tasks::reloadTasksFromFile(QListWidget* listWidget)
 {
@@ -139,4 +144,31 @@ void Tasks::reloadTasksFromFile(QListWidget* listWidget)
         w.setModal(true);
         w.exec();
     }
+}
+
+
+bool Tasks::removeTaskFromFile(int taskNumber)
+{
+    QFile file("./tasks.txt");
+    if (file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        QStringList lines;
+        QTextStream readStream(&file);
+        while (!readStream.atEnd()) {
+            QString line = readStream.readLine();
+            QStringList parts = line.split("/");
+            int number = parts[0].toInt();
+            if (number != taskNumber) {
+                lines << line;
+            }
+        }
+        file.close();
+
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream writeStream(&file);
+            writeStream << lines.join("\n");
+            file.close();
+            return true;
+        }
+    }
+    return false;
 }

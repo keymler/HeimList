@@ -27,6 +27,7 @@ public:
     bool saveTaskToFile(int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text);
     void createTaskItem(QListWidget* listWidget, int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text);
     void reloadTasksFromFile(QListWidget* listWidget);
+    bool removeTaskFromFile(int taskNumber);
 
 protected:
     int number;
