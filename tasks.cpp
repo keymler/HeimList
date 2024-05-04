@@ -48,19 +48,34 @@ QString Tasks::toString() const
 
 bool Tasks::saveTaskToFile(int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text)
 {
+    // Открываем файл для чтения и записи
     QFile file("./tasks.txt");
-    if (file.open(QIODevice::Append | QIODevice::Text))
+    if (file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        QTextStream writeStream(&file);
-        QString formattedDateTime = dateTime.toString("dd.MM.yyyy HH:mm");
-        writeStream << QString("%1/%2/%3/%4/%5").arg(number).arg(status).arg(difficulty).arg(formattedDateTime).arg(text) << Qt::endl;
+        // Читаем текущее содержимое файла
+        QString existingContent = file.readAll();
+
+        // Закрываем файл
         file.close();
-        return true;
+
+        // Открываем файл для записи (с содержимым удаленным)
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream writeStream(&file);
+            QString formattedDateTime = dateTime.toString("dd.MM.yyyy HH:mm");
+
+            // Записываем новые данные в начало файла, а затем старое содержимое
+            writeStream << QString("%1/%2/%3/%4/%5").arg(number).arg(status).arg(difficulty).arg(formattedDateTime).arg(text) << Qt::endl;
+            writeStream << existingContent;
+
+            // Закрываем файл
+            file.close();
+            return true;
+        }
     }
-    else
-    {
-        return false;
-    }
+
+    // Если что-то пошло не так, возвращаем false
+    return false;
 }
 
 void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text)
@@ -106,6 +121,10 @@ void Tasks::reloadTasksFromFile(QListWidget* listWidget)
         while (!readStream.atEnd()) {
             QString line = readStream.readLine();
             QStringList parts = line.split("/");
+            if (parts.size() < 5) {
+                qDebug() << "Invalid line format: " << line;
+                continue;
+            }
             int number = parts[0].toInt();
             int status = parts[1].toInt();
             QString difficulty = parts[2];
