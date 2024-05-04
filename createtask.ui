@@ -22,6 +22,9 @@
      <height>121</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 252, 233);</string>
+   </property>
   </widget>
   <widget class="QComboBox" name="difficultyEdit">
    <property name="geometry">
@@ -61,11 +64,18 @@
   <widget class="QPushButton" name="saveButton">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>260</y>
-     <width>80</width>
-     <height>24</height>
+     <x>268</x>
+     <y>250</y>
+     <width>94</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: 700;
+color: white;
+background-color: rgb(70, 162, 12);
+border-radius: 6px;
+text-align: center;</string>
    </property>
    <property name="text">
     <string>Save</string>
@@ -75,10 +85,17 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>260</y>
-     <width>80</width>
-     <height>24</height>
+     <y>250</y>
+     <width>91</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: 700;
+color: white;
+background-color: rgb(168, 7, 50);
+border-radius: 6px;
+text-align: center;</string>
    </property>
    <property name="text">
     <string>Cancel</string>
@@ -94,7 +111,34 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="background">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>401</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/img/img/woodTexture.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>background</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>difficultyEdit</zorder>
+  <zorder>saveButton</zorder>
+  <zorder>cancelButton</zorder>
+  <zorder>dateTimeEdit</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

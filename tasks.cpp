@@ -52,29 +52,20 @@ bool Tasks::saveTaskToFile(int number, int status, const QString& difficulty, co
     QFile file("./tasks.txt");
     if (file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        // Читаем текущее содержимое файла
         QString existingContent = file.readAll();
-
-        // Закрываем файл
         file.close();
-
-        // Открываем файл для записи (с содержимым удаленным)
         if (file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
             QTextStream writeStream(&file);
             QString formattedDateTime = dateTime.toString("dd.MM.yyyy HH:mm");
 
-            // Записываем новые данные в начало файла, а затем старое содержимое
             writeStream << QString("%1/%2/%3/%4/%5").arg(number).arg(status).arg(difficulty).arg(formattedDateTime).arg(text) << Qt::endl;
             writeStream << existingContent;
 
-            // Закрываем файл
             file.close();
             return true;
         }
     }
-
-    // Если что-то пошло не так, возвращаем false
     return false;
 }
 
@@ -96,18 +87,27 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
 
     QCheckBox *checkBox = new QCheckBox;
     checkBox->setFixedSize(25, 25);
-    layout->addWidget(checkBox, 0, 1, Qt::AlignRight | Qt::AlignTop);
+    layout->addWidget(checkBox, 0, 2, Qt::AlignRight);
 
     QLabel *difficultyLabel = new QLabel(difficulty);
-    difficultyLabel->setFixedSize(75, 25);
-    layout->addWidget(difficultyLabel, 1, 1, Qt::AlignRight | Qt::AlignBottom);
+    difficultyLabel->setFixedSize(50, 25);
+    layout->addWidget(difficultyLabel, 1, 2, Qt::AlignRight | Qt::AlignBottom);
 
     layout->setContentsMargins(5, 5, 5, 5);
+    layout->setColumnStretch(1, 1);
 
     widget->setLayout(layout);
-    item->setSizeHint(QSize(335, 75));
+
+    item->setSizeHint(QSize(320, 70));
     listWidget->addItem(item);
     listWidget->setItemWidget(item, widget);
+
+    QFrame *separator = new QFrame;
+    separator->setFrameShape(QFrame::HLine);
+    separator->setFrameShadow(QFrame::Sunken);
+    QListWidgetItem *separatorItem = new QListWidgetItem;
+    listWidget->addItem(separatorItem);
+    listWidget->setItemWidget(separatorItem, separator);
 }
 
 void Tasks::reloadTasksFromFile(QListWidget* listWidget)

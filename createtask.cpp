@@ -26,6 +26,8 @@ createTask::createTask(QWidget *parent, QListWidget *listWidget)
         }
         file.close();
     }
+
+    ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
 }
 
 createTask::~createTask()
@@ -36,9 +38,7 @@ createTask::~createTask()
 void createTask::on_saveButton_clicked()
 {
 
-    if (!ui->lineEdit->text().isEmpty() &&
-        !ui->dateTimeEdit->text().isEmpty() &&
-        ui->difficultyEdit->currentIndex() != -1)
+    if (!ui->lineEdit->text().isEmpty())
     {
         int newTaskNumber = ++maxTaskNumber;
         int status = 1;

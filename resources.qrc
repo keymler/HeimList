@@ -6,6 +6,7 @@
         <file>img/createIcon.jpg</file>
         <file>img/deleteIcon.jpg</file>
         <file>img/editIcon.jpg</file>
+        <file>img/woodTexture.jpg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Inkulinati-Regular.otf</file>
