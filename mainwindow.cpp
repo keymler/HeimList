@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     Tasks tasks;
     tasks.reloadTasksFromFile(ui->listWidget);
-
+    tasks.readScore(ui->score);
 }
 
 MainWindow::~MainWindow()
@@ -100,7 +100,8 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         QLabel* taskNumberLabel = itemWidget->findChild<QLabel*>("taskNumberLabel");
         int taskNumber = taskNumberLabel->text().toInt();
 
-        editTask* editTaskDialog = new editTask(this, taskNumber);
+        editTask* editTaskDialog = new editTask(this, taskNumber, ui->listWidget);
+        editTaskDialog->setWindowTitle("Edit task");
         editTaskDialog->exec();
         delete editTaskDialog;
     }
@@ -110,8 +111,15 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         updateWidgetStyleMarkAsDone(false);
         QWidget* itemWidget = ui->listWidget->itemWidget(item);
         QLabel* taskNumberLabel = itemWidget->findChild<QLabel*>("taskNumberLabel");
+        QLabel* difficultyLabel = itemWidget->findChild<QLabel*>("difficultyLabel");
         int taskNumber = taskNumberLabel->text().toInt();
+        QString difficulty = difficultyLabel->text();
 
+        Tasks tasks;
+        tasks.addScore(ui->score, taskNumber, 1, difficulty);
+        tasks.removeTaskFromFile(taskNumber);
+        tasks.reloadTasksFromFile(ui->listWidget);
         qDebug() << taskNumber;
+        qDebug() << difficulty;
     }
 }

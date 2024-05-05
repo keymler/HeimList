@@ -28,6 +28,8 @@ public:
     void createTaskItem(QListWidget* listWidget, int number, int status, const QString& difficulty, const QDateTime& dateTime, const QString& text);
     void reloadTasksFromFile(QListWidget* listWidget);
     bool removeTaskFromFile(int taskNumber);
+    void readScore(QLabel* scoreLabel);
+    void addScore(QLabel* scoreLabel, int number, int status, const QString& difficulty);
 
 protected:
     int number;

@@ -86,6 +86,7 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
 
     QLabel *difficultyLabel = new QLabel(difficulty);
     difficultyLabel->setFixedSize(50, 25);
+    difficultyLabel->setObjectName("difficultyLabel");
     layout->addWidget(difficultyLabel, 1, 2, Qt::AlignRight | Qt::AlignBottom);
 
     QLabel *taskNumberLabel = new QLabel(QString::number(number));
@@ -168,3 +169,73 @@ bool Tasks::removeTaskFromFile(int taskNumber)
     }
     return false;
 }
+
+void Tasks::readScore(QLabel* scoreLabel){
+    QFile file("./score.txt");
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QString line = file.readLine();
+        file.close();
+
+        bool ok;
+        int score = line.toInt(&ok);
+
+        if (ok) {
+            scoreLabel->setText(QString::number(score));
+        } else {
+            qDebug() << "!toint";
+        }
+    } else {
+        qDebug() << "File score doesnt open";
+    }
+}
+
+
+void Tasks::addScore(QLabel* scoreLabel, int number, int status, const QString& difficulty){
+    int addedNumber = 0;
+    if(difficulty == "Routine"){
+        addedNumber = 15;
+    }else if(difficulty == "Easy"){
+        addedNumber = 20;
+    }else if(difficulty == "Medium"){
+        addedNumber = 25;
+    }else if(difficulty == "Hard"){
+        addedNumber = 35;
+    }else if(difficulty == "Demon"){
+        addedNumber = 50;
+    }else{
+        qDebug() << "incorrect difficulty";
+    }
+    if(!status){
+        addedNumber -= 10;
+    }
+
+    int previousNumber = scoreLabel->text().toInt();
+    scoreLabel->setText(QString::number(previousNumber + addedNumber));
+
+    QFile file("./score.txt");
+    if (file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        out << scoreLabel->text();
+        file.close();
+    }
+    else
+    {
+        qDebug() << "Failed to open score file";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

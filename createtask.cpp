@@ -12,7 +12,6 @@ createTask::createTask(QWidget *parent, QListWidget *listWidget)
 {
     ui->setupUi(this);
 
-
     QFile file("./tasks.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream readStream(&file);
