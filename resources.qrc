@@ -1,15 +1,8 @@
 <RCC>
     <qresource prefix="/data">
-        <file>data/score.txt</file>
         <file>data/tasks.txt</file>
     </qresource>
-    <qresource prefix="/img">
-        <file>img/createIcon.jpg</file>
-        <file>img/deleteIcon.jpg</file>
-        <file>img/editIcon.jpg</file>
-        <file>img/woodTexture.jpg</file>
-        <file>img/markAsDoneIcon.jpg</file>
-    </qresource>
+    <qresource prefix="/img"/>
     <qresource prefix="/fonts">
         <file>fonts/Inkulinati-Regular.otf</file>
         <file>fonts/Ramona-Bold.ttf</file>
