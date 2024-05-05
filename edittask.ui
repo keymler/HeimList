@@ -13,7 +13,132 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QPushButton" name="saveButton">
+   <property name="geometry">
+    <rect>
+     <x>268</x>
+     <y>250</y>
+     <width>94</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: 700;
+color: white;
+background-color: rgb(70, 162, 12);
+border-radius: 6px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="background">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>401</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/img/img/woodTexture.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="dateTimeEdit">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>200</y>
+     <width>194</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>250</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: 700;
+color: white;
+background-color: rgb(168, 7, 50);
+border-radius: 6px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>70</y>
+     <width>321</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 252, 233);</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="difficultyEdit">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>200</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Routine</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Easy</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Medium</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hard</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Demon</string>
+    </property>
+   </item>
+  </widget>
+  <zorder>background</zorder>
+  <zorder>dateTimeEdit</zorder>
+  <zorder>cancelButton</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>difficultyEdit</zorder>
+  <zorder>saveButton</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -60,6 +60,23 @@ void MainWindow::on_actionedit_triggered(bool checked)
     updateWidgetStyleEdit(checked);
 }
 
+void MainWindow::updateWidgetStyleMarkAsDone(bool markAsDoneMode)
+{
+    if (markAsDoneMode) {
+        ui->listWidget->setStyleSheet("background-color: rgb(25, 190, 80); color: white;");
+        qDebug() << ("MarkAsDone action activated");
+    } else {
+        ui->listWidget->setStyleSheet("background-color: rgb(255, 245, 165);");
+        qDebug() << ("MarkAsDone action deactivated");
+    }
+}
+void MainWindow::on_actionmarkasdone_triggered(bool checked)
+{
+    updateWidgetStyleMarkAsDone(checked);
+}
+
+
+
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     if (ui->actiondelete->isChecked()) {
@@ -87,9 +104,14 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         editTaskDialog->exec();
         delete editTaskDialog;
     }
+
+    if (ui->actionmarkasdone->isChecked()) {
+        ui->actionmarkasdone->setChecked(false);
+        updateWidgetStyleMarkAsDone(false);
+        QWidget* itemWidget = ui->listWidget->itemWidget(item);
+        QLabel* taskNumberLabel = itemWidget->findChild<QLabel*>("taskNumberLabel");
+        int taskNumber = taskNumberLabel->text().toInt();
+
+        qDebug() << taskNumber;
+    }
 }
-
-
-
-
-

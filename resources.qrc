@@ -7,6 +7,7 @@
         <file>img/deleteIcon.jpg</file>
         <file>img/editIcon.jpg</file>
         <file>img/woodTexture.jpg</file>
+        <file>img/markAsDoneIcon.jpg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Inkulinati-Regular.otf</file>

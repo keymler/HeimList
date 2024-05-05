@@ -26,6 +26,10 @@ private slots:
     void on_actionedit_triggered(bool checked);
     void updateWidgetStyleEdit(bool editMode);
 
+    void on_actionmarkasdone_triggered(bool checked);
+    void updateWidgetStyleMarkAsDone(bool markAsDoneMode);
+
+
 private:
     Ui::MainWindow *ui;
     QListWidget* listWidget;

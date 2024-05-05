@@ -84,10 +84,6 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
     dateLabel->setFixedSize(150, 25);
     layout->addWidget(dateLabel, 1, 0, Qt::AlignLeft | Qt::AlignBottom);
 
-    QCheckBox *checkBox = new QCheckBox;
-    checkBox->setFixedSize(25, 25);
-    layout->addWidget(checkBox, 0, 2, Qt::AlignRight);
-
     QLabel *difficultyLabel = new QLabel(difficulty);
     difficultyLabel->setFixedSize(50, 25);
     layout->addWidget(difficultyLabel, 1, 2, Qt::AlignRight | Qt::AlignBottom);
