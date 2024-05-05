@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <tasks.h>
+#include <taskswithpriority.h>
 #include <QFontDatabase>
 #include "warningwindow.h"
 
@@ -32,6 +33,11 @@ editTask::editTask(QWidget *parent, int taskNumber, QListWidget *listWidget)
                 QDateTime dateTime = QDateTime::fromString(parts[3], "dd.MM.yyyy HH:mm");
                 QString text = parts[4];
 
+                if (parts.size()==6) {
+                    QString priority = parts[5];
+                    ui->priorityEdit->setCurrentText(priority);
+                }
+
                 ui->lineEdit->setText(text);
                 ui->dateTimeEdit->setDateTime(dateTime);
                 ui->difficultyEdit->setCurrentText(difficulty);
@@ -44,9 +50,6 @@ editTask::editTask(QWidget *parent, int taskNumber, QListWidget *listWidget)
         w.setModal(true);
         w.exec();
     }
-
-
-
 }
 
 editTask::~editTask()
@@ -61,11 +64,17 @@ void editTask::on_saveButton_clicked()
     QString taskDifficulty = ui->difficultyEdit->currentText();
 
     Tasks tasks;
-    tasks.removeTaskFromFile(m_taskNumber);
+    TaskWithPriority taskWithPriority;
 
-    tasks.saveTaskToFile(m_taskNumber, 0, taskDifficulty, taskDateTime, taskText);
+    if(ui->priorityEdit->currentText().toInt() > 0){
+        tasks.removeTaskFromFile(m_taskNumber);
+        taskWithPriority.saveTaskToFileWithPriority(m_taskNumber, 0, taskDifficulty, taskDateTime, taskText, ui->priorityEdit->currentText().toInt());
+    }else{
+        tasks.removeTaskFromFile(m_taskNumber);
+        tasks.saveTaskToFile(m_taskNumber, 0, taskDifficulty, taskDateTime, taskText);
+    }
 
-    tasks.reloadTasksFromFile(m_listWidget);
+    taskWithPriority.reloadTasksFromFileWithPriority(m_listWidget);
 
     close();
 }

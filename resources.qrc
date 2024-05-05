@@ -10,10 +10,4 @@
         <file>img/markAsDoneIcon.jpg</file>
         <file>img/woodTexture.jpg</file>
     </qresource>
-    <qresource prefix="/fonts">
-        <file>fonts/Inkulinati-Regular.otf</file>
-        <file>fonts/Ramona-Bold.ttf</file>
-        <file>fonts/ShantellSans-Bold.ttf</file>
-        <file>fonts/TypeyMctypefaceItalic.ttf</file>
-    </qresource>
 </RCC>

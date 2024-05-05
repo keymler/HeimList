@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     tasks.cpp \
+    taskswithpriority.cpp \
     warningwindow.cpp
 
 HEADERS += \
@@ -21,6 +22,7 @@ HEADERS += \
     edittask.h \
     mainwindow.h \
     tasks.h \
+    taskswithpriority.h \
     warningwindow.h
 
 FORMS += \

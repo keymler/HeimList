@@ -57,7 +57,7 @@ text-align: center;</string>
     <rect>
      <x>40</x>
      <y>200</y>
-     <width>194</width>
+     <width>111</width>
      <height>25</height>
     </rect>
    </property>
@@ -98,9 +98,9 @@ text-align: center;</string>
   <widget class="QComboBox" name="difficultyEdit">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>270</x>
      <y>200</y>
-     <width>101</width>
+     <width>91</width>
      <height>24</height>
     </rect>
    </property>
@@ -130,12 +130,66 @@ text-align: center;</string>
     </property>
    </item>
   </widget>
+  <widget class="QComboBox" name="priorityEdit">
+   <property name="geometry">
+    <rect>
+     <x>165</x>
+     <y>200</y>
+     <width>41</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <item>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>3</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>206</x>
+     <y>200</y>
+     <width>49</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(253, 253, 253);
+color: rgb(0, 0, 0);
+border: 1px solid rgb(184, 184, 184);
+</string>
+   </property>
+   <property name="text">
+    <string>Priority</string>
+   </property>
+  </widget>
   <zorder>background</zorder>
   <zorder>dateTimeEdit</zorder>
   <zorder>cancelButton</zorder>
   <zorder>lineEdit</zorder>
   <zorder>difficultyEdit</zorder>
   <zorder>saveButton</zorder>
+  <zorder>priorityEdit</zorder>
+  <zorder>label</zorder>
  </widget>
  <resources>
   <include location="resources.qrc"/>

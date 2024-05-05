@@ -1,5 +1,6 @@
 #include "tasks.h"
 #include "warningwindow.h"
+#include "taskswithpriority.h""
 
 Tasks::Tasks() {
 
@@ -76,7 +77,7 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
 
     QLabel *taskLabel = new QLabel(text);
     taskLabel->setWordWrap(true);
-    taskLabel->setFixedSize(200, 50);
+    taskLabel->setFixedSize(200, 30);
     layout->addWidget(taskLabel, 0, 0);
 
     QString dateTimeString = dateTime.toString();
@@ -85,7 +86,7 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
     layout->addWidget(dateLabel, 1, 0, Qt::AlignLeft | Qt::AlignBottom);
 
     QLabel *difficultyLabel = new QLabel(difficulty);
-    difficultyLabel->setFixedSize(50, 25);
+    difficultyLabel->setFixedSize(59, 25);
     difficultyLabel->setObjectName("difficultyLabel");
     layout->addWidget(difficultyLabel, 1, 2, Qt::AlignRight | Qt::AlignBottom);
 
@@ -114,7 +115,6 @@ void Tasks::createTaskItem(QListWidget* listWidget, int number, int status, cons
 
 void Tasks::reloadTasksFromFile(QListWidget* listWidget)
 {
-    qDebug() << "asfuhid";
     listWidget->clear();
     QFile file("./tasks.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -125,13 +125,13 @@ void Tasks::reloadTasksFromFile(QListWidget* listWidget)
             QStringList parts = line.split("/");
             if (parts.size() < 5) {
                 qDebug() << "Invalid line format: " << line;
-                continue;
             }
             int number = parts[0].toInt();
             int status = parts[1].toInt();
             QString difficulty = parts[2];
             QDateTime dateTime = QDateTime::fromString(parts[3], "dd.MM.yyyy HH:mm");
             QString text = parts[4];
+
             createTaskItem(listWidget, number, status, difficulty, dateTime, text);
         }
         file.close();
@@ -142,7 +142,6 @@ void Tasks::reloadTasksFromFile(QListWidget* listWidget)
         w.exec();
     }
 }
-
 
 bool Tasks::removeTaskFromFile(int taskNumber)
 {

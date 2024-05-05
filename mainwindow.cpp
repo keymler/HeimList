@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <tasks.h>
+#include <taskswithpriority.h>
 #include <QFontDatabase>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -16,8 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->toolBar->setMovable(false);
 
+    TaskWithPriority taskWithPriority;
+    taskWithPriority.reloadTasksFromFileWithPriority(ui->listWidget);
+
     Tasks tasks;
-    tasks.reloadTasksFromFile(ui->listWidget);
     tasks.readScore(ui->score);
 }
 
@@ -90,7 +93,8 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         } else {
             qDebug() << "Failed to remove task" << taskNumber;
         }
-        tasks.reloadTasksFromFile(ui->listWidget);
+        TaskWithPriority taskWithPriority;
+        taskWithPriority.reloadTasksFromFileWithPriority(ui->listWidget);
     }
 
     if (ui->actionedit->isChecked()) {
@@ -118,8 +122,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         Tasks tasks;
         tasks.addScore(ui->score, taskNumber, 1, difficulty);
         tasks.removeTaskFromFile(taskNumber);
-        tasks.reloadTasksFromFile(ui->listWidget);
-        qDebug() << taskNumber;
-        qDebug() << difficulty;
+        TaskWithPriority taskWithPriority;
+        taskWithPriority.reloadTasksFromFileWithPriority(ui->listWidget);
     }
 }

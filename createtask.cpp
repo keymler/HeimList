@@ -3,6 +3,7 @@
 #include "warningwindow.h"
 #include <QTextStream>
 #include <tasks.h>
+#include <taskswithpriority.h>
 #include <QApplication>
 
 createTask::createTask(QWidget *parent, QListWidget *listWidget)
@@ -45,19 +46,27 @@ void createTask::on_saveButton_clicked()
         QDateTime dateTime = ui->dateTimeEdit->dateTime();
         QString text = ui->lineEdit->text();
 
+        TaskWithPriority taskWithPriority(newTaskNumber, status, difficulty, dateTime, text, ui->priorityEdit->currentText().toInt());
         Tasks task(newTaskNumber, status, difficulty, dateTime, text);
-        if (task.saveTaskToFile(newTaskNumber, status, difficulty, dateTime, text))
-        {
-            Tasks tasks;
-            tasks.reloadTasksFromFile(m_listWidget);
-            close();
 
-        } else{
-            warningWindow w;
-            w.setErrorDescription("Failed to save the task to a file");
-            w.setModal(true);
-            w.exec();
+        if(ui->priorityEdit->currentText().toInt() > 0){
+            taskWithPriority.saveTaskToFileWithPriority(newTaskNumber, status, difficulty, dateTime, text, ui->priorityEdit->currentText().toInt());
+            taskWithPriority.reloadTasksFromFileWithPriority(m_listWidget);
+            close();
+        }else{
+            if (task.saveTaskToFile(newTaskNumber, status, difficulty, dateTime, text))
+            {
+                taskWithPriority.reloadTasksFromFileWithPriority(m_listWidget);
+                close();
+
+            } else{
+                warningWindow w;
+                w.setErrorDescription("Failed to save the task to a file");
+                w.setModal(true);
+                w.exec();
+            }
         }
+
     } else{
         warningWindow w;
         w.setErrorDescription("Not all fields are filled in");
