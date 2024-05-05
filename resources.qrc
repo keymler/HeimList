@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/data">
-        <file>data/tasks.txt</file>
         <file>data/score.txt</file>
+        <file>data/tasks.txt</file>
     </qresource>
     <qresource prefix="/img">
         <file>img/createIcon.jpg</file>
